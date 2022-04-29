@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
+<!--        <script src="newjavascript.js" type="text/javascript"></script>-->
+    </head>
+    <body>
+		
+		
+		<div id="div" src=""></div>
+		
+		<canvas id="imagen"></canvas>
+		<canvas id="aleatoriedad"></canvas>
+		
+		<script>
+		
+		
+		const cuadrado = tf.tensor([ [[1], [1]],[[0], [1]] ]); 
+			
+		/*const cuadrado = tf.tensor(	[ 
+										[											
+											[0, 125, 10], 
+											[0, 0, 0]
+										],
+										[
+											[0, 0, 0], 
+											[1, 1, 1 ]
+										] 
+									],null, 'int32'); */
+		
+		
+		
+		// crea un nuevo tensor multiplicandoló
+		//tf.tile(x, reps) x -> tensor dado, o array; reps -> numero de réplicas por dimension
+		//tensor.tile(reps) reps -> numero de réplicas por dimension [reps]
+		
+		//https://js.tensorflow.org/api/latest/#Tensors-Random
+		
+		
+		const cuadradoGrande = cuadrado.tile ([200, 200, 1]);	
+        /*document.getElementById("ItemPreview").src = "data:image/png;base64," + grande.print();
+		console.log(grande);*/
+				
+		const canvasCuadrado = document.getElementById("imagen");
+		tf.browser.toPixels(cuadradoGrande, canvasCuadrado	).then(() => {
+							// No es mala práctica limpiar y asegurarse de que tenemos todo bigMess.dispose();
+							
+							});
+		
+		
+		</script>
+    </body>
+</html>

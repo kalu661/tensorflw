@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
+<!--        <script src="newjavascript.js" type="text/javascript"></script>-->
+    </head>
+    <body>
+		
+					
+		<canvas id="aleatoriedad"></canvas>
+		
+		<script>
+		// tf.random.uniform(shape, minval=0, maxval=None, dtype=tf.dtypes.float32, seed=None, name=None)
+		// const bigMess = tf.randomUniform([400, 400, 1]); 
+		const bigMess = tf.randomUniform([400, 400, 1], 100, 255, 'int32'); 
+		const myCanvas = document.getElementById("aleatoriedad");
+		tf.browser.toPixels(bigMess, myCanvas).then(() => {
+							// No es mala práctica limpiar y asegurarse de que tenemos todo bigMess.dispose();
+
+							});	
+		
+		//tf.browser.toPixels()
+		//
+		</script>
+    </body>
+</html>

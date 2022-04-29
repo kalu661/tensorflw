@@ -1,0 +1,57 @@
+
+tensores de imágenes son de rango dos, aunque, para representar una imagen 2d en un tensor 2d solo se puede en escala de grises
+con lo cual si queremos hacer un tablero blanco negro sería de la forma
+
+****El rango u orden de un tensor será el número de índices necesario para especificar sin ambigüedad un componente de un tensor: el escalar es de orden 0 
+el vector de 1 las matrices
+
+tf.tensor([ 
+			[
+				[1],[0],[1],[0]
+			],
+			[ 	
+				[0],[1],[0],[1]
+			],
+			[ 
+				[1],[0],[1],[0]
+			]
+		])
+
+Para la coloracion de un pixel se usan tres valores Rojo Verde Rojo o RGB por sus siglas en ingles
+para su reprentacion tenemos una matriz de orden uno con tres valores que van de 0-255 [255,255,255] o en hexa #FFFFFF
+(explicar valores)
+En float [1, 1, 1] equivale al blanco #FFFFFF
+Mientras que en Int [1, 1, 1] es negro #010101
+Con lo cual según el tipo de datos del tensor se obtienen colores distintos
+
+Lo que significa que para poder tener una imagen en colores se necesita un tensor de 3D, donde cada pixel será un matriz 1D dentro nuevamente de un ancho por 
+alto
+
+Se suele ver al tamaño de las imágenes como 1024x768(ancho por alto) pero en tensor flow lo común es alto por ancho y ultimo la dimension RGB, con lo cual tenemos del ejemplo [768, 1024, 3]
+
+tf.tensor(
+			[
+				[
+					[1, 1, 1],
+					[0, 0, 0],
+					[1, 1, 1],
+					[0, 0, 0]
+				],
+				[ 
+					[0, 0, 0],
+					[1, 1, 1],
+					[0, 0, 0],
+					[1, 1, 1]
+				],
+				[ 
+					[1, 1, 1],
+					[0, 0, 0],
+					[1, 1, 1],
+					[0, 0, 0]
+				]
+			])
+
+se puede agregar un apacidad o transparencia, donde 00 sería transparente FF seria opaco total, agregando así una dimension mas al tensor, por lo que la imagén anterior sería [768, 1024, 4]
+
+Para crear un tensor
+tf.fill( shape, value, dType) -> crea un tensor llenos con valores [values], las dimensiones las paso con una matriz 1d [AxAn], y puede dar tipos de datos conocidos
