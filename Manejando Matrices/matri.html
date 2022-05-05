@@ -7,28 +7,25 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/3.16.0/tf.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
+		<script src="matri.css"></script>
 		<title>Matrices</title>
 	</head>
 	<body>
-		<h1>Manejando Matrices</h1>
-		<div>
-			<form>
-				<p>Ingrese los numeros de una matriz de 3x3</p>
-				<!-- Los numero ingresados los guardo en su respectivo id -->
-				<input id="num1d" type="nume1" />
-				<input id="num2d" type="nume2" />
-				<input id="num3d" type="nume3" /><br />
-				<input id="num4d" type="nume4" />
-				<input id="num5d" type="nume5" />
-				<input id="num6d" type="nume6" /><br />
-				<p></p>
-				<!-- Al hacer click en el botorn llama a la funcion -->
-				<button onclick="funcionLineal()">Prediccion</button>
-				<p></p>
-				<!-- Muestra el resultado -->
-				<div id="salida"></div>
-				<script src="matri.js"></script>
-			</form>
-		</div>
+		<h1 class="text">Manejando Matrices</h1>
+		<p>Ingrese los numeros de una matriz de 3x3</p>
+		<!-- Los numero ingresados los guardo en su respectivo id -->
+		<input id="num1d" type="nume1" />
+		<input id="num2d" type="nume2" />
+		<input id="num3d" type="nume3" /><br />
+		<input id="num4d" type="nume4" />
+		<input id="num5d" type="nume5" />
+		<input id="num6d" type="nume6" /><br />
+		<p></p>
+		<!-- Al hacer click en el botorn llama a la funcion -->
+		<button onclick="funcionLineal()">Prediccion</button>
+		<p></p>
+		<!-- Muestra el resultado -->
+		<script src="matri.js"></script>
+		<div id="salida"></div>
 	</body>
 </html>
