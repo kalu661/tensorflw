@@ -9,7 +9,7 @@ window.addEventListener("load", function () {
 		// Now load an image object in JavaScript
 		const cake = new Image();
 		cake.crossOrigin = "anonymous";
-		// cake.src = "/kalu.jpg";
+		// cake.src = "/Imagen a tensor/img/1173121.jpg";
 		cake.onload = () => {
 			const cakeTensor = tf.browser.fromPixels(cake);
 			document.getElementById("salida").innerHTML = console.log(
