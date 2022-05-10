@@ -1,53 +1,122 @@
-let x_pos = [];
-let y_pos = [];
+// FORMULA 2x-2
+// Creamos el modelo
+const modelo = tf.sequential();
+//se agrega una capa
+modelo.add(
+	tf.layers.dense({
+		inputShape: 1,
+		units: 1,
+	})
+);
 
-let w, b;
+modelo.compile({
+	optimizer: "sgd",
+	loss: "meanSquaredError",
+});
 
-const learningRate = 0.5;
-const optimizer = tf.train.sgd(learningRate);
+// Valores de X
+const xs = tf.tensor([0, 1, 2, 3, 4, 5, 6, 7]);
+// Valores de Y
+const ys = tf.tensor([-2, 0, 2, 4, 6, 8, 10, 12]);
+// Entrenamos el modelo
+modelo
+	.fit(xs, ys, { epochs: 300 })
 
-function setup() {
-	createCanvas(800, 600);
-	background(0);
-	w = tf.variable(tf.scalar(random(1)));
-	b = tf.variable(tf.scalar(random(1)));
-}
+	.then(() => {
+		//console.log(history)
+		//Le pasamos los Valores de X
+		const TensorX = tf.tensor([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+		//Hace la prediccion
+		const datosTensor = modelo.predict(TensorX).dataSync();
 
-function predecir(x) {
-	const xs = tf.tensor1d(x);
-	// y=w*x + b
-	const ys = xs.mul(w).add(b);
-	return ys;
-}
+		//console.log(datosTensor);
 
-function mousePressed() {
-	let x = map(mouseX, 0, width, 0, 1);
-	let y = map(mouseY, 0, height, 1, 0);
-	x_pos.push(x);
-	y_pos.push(y);
-}
+		//Se Mapean los valores de X e Y en consola
+		datosTensor.map((num, i) => {
+			//document.getElementById("Tensores").innerHTML =`Cuando X es: ${TensorX.dataSync()[i]}, Y es: ${Math.round(num)}`;
+			console.log("===================");
+			console.log(
+				`Cuando X es: ${TensorX.dataSync()[i]}, Y es: ${Math.round(num)}`
+			);
+			console.log("===================");
+		});
 
-function draw() {
-	background(0);
-	stroke(255);
-	strokeWeight(10);
-	for (i = 0; i < x_pos.length; i++) {
-		let px = map(x_pos[i], 0, 1, 0, width);
-		let py = map(y_pos[i], 0, 1, height, 0);
-		point(px, py);
-	}
-	tf.tidy(() => {
-		if (x_pos.length > 0) {
-			const ys = tf.tensor1d(y_pos);
-			optimizer.minimize(() => predecir(x_pos).sub(ys).square().mean());
-		}
+		//console.log(datosTensor)
+
+		//Desestructuración
+		const [...valores] = datosTensor;
+		//console.log(valores)
+
+		//Separar los valores en x e Y
+		const res = valores.map((y, x) => ({ x, y }));
+		console.log("Resultado ", res);
+		//console.log(res);
+
+		//////////////////////////////////////////
+		const series = ["y=2x-2"];
+		const data = {
+			values: [res],
+			series,
+		};
+
+		const surface = {
+			name: "Brito Enzo",
+			tab: "Grafico Del Tensor",
+		};
+		tfvis.render.linechart(surface, data);
+		//////////////////////
+		console.log(
+			"[1]Tensores: ",
+			tf.memory().numTensors,
+			", [1]Memoria: ",
+			tf.memory().numBytes
+		);
+		//////////////////////
+
+		// Limpiamos los tensores.
+		tf.dispose([xs, ys, modelo, datosTensor, TensorX]);
+
+		//////////////////////
+		console.log(
+			"[2]Tensores: ",
+			tf.memory().numTensors,
+			", [2]Memoria: ",
+			tf.memory().numBytes
+		);
 	});
-	let y_pred = tf.tidy(() => predecir([0, 1]));
-	let val_y_pred = y_pred.dataSync();
-	y_pred.dispose();
-	let x1 = map(0, 0, 1, 0, width);
-	let x2 = map(1, 0, 1, 0, width);
-	let y1 = map(val_y_pred[0], 0, 1, height, 0);
-	let y2 = map(val_y_pred[1], 0, 1, height, 0);
-	line(x1, y1, x2, y2);
+
+//=================================================================================
+//Perdidas
+
+const model = tf.sequential({
+	layers: [
+		tf.layers.dense({
+			inputShape: 1,
+			units: 1,
+			activation: "relu",
+		}),
+	],
+});
+model.compile({
+	optimizer: "sgd",
+	loss: "meanSquaredError",
+	metrics: ["accuracy"],
+});
+
+//const data = tf.randomNormal([100, 784]);
+//const labels = tf.randomUniform([100, 10]);
+
+function onBatchEnd(batch, logs) {
+	console.log("Accuracy", logs.acc);
 }
+
+const surface = {
+	name: "Grafico De pérdida",
+	tab: "Grafico De pérdida",
+};
+// Train for 5 epochs with batch size of 32.
+model.fit(xs, ys, {
+	epochs: 10,
+	batchSize: 32,
+	callbacks: tfvis.show.fitCallbacks(surface, ["loss", "acc"]),
+});
