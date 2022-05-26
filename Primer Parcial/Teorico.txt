@@ -1,0 +1,17 @@
+1: La relación que existe entre los términos enseñanza y aprendizaje es que la misma es una relación simbiótica el maestro enseña al alumno, aplica toda su capacidad para que el alumno aprenda; el alumno aprende porque pone en juego sus habilidades cognoscitivas, entre ellas esta el aprendizaje. 
+
+2. El tipo de datos de un tensor debe ser homogéneo (todos del mismo tipo). Estos tipos pueden ser solo Float32, Int32, bool, complex64 o string, sin mezclarlos.
+
+3. Si tiene acceso a la GPU y la Memoria
+
+Para la GPU: Si su objetivo es ir más allá de la experimentación y convertirse en Node.js eficaz con Tensor-Flow.js, debería dedicar algún tiempo a mejorar su configuración de Node.js con algunos de estos paquetes alternativos. Hay dos mejores distribuciones de TensorFlow.js que están diseñadas específicamente para Node y speed, son tfjs- node y tfjs-node-gpu.
+
+Para Node.js, probablemente elija entre @tensorflow/tfjs-node o @tensorflow/tfjs-node-gpu. Puede utilizar el último paquete impulsado por GPU si su computadora está configurada con una GPU NVIDIA y correctamente configurada con el software CUDA. Compute Unified Device Architecture (CUDA) permite el acceso directo acelerado por GPU a través de una plataforma informática paralela para hardware NVIDIA.
+
+Memoria: Debido a que los tensores sobreviven a la recolección de elementos no utilizados, se comportan de manera diferente al JavaScript estándar y deben contabilizarse y desasignarse manualmente. Incluso si una variable se recolecta como basura en JavaScript, el tensor asociado queda huérfano en la memoria.
+
+Puede acceder al conteo y tamaño actuales usando tf.memory(). Esta función devuelve un objeto con un informe de tensores activos.
+
+Como ya sabe que los tensores son para manejar grandes datos acelerados, la idea de dejar estos fragmentos considerables en la memoria es un problema. Con un pequeño bucle, podría perder la RAM y la GPU disponibles de una computadora completa.
+
+Afortunadamente, todos los tensores y modelos tienen un método .dispose() que elimina un tensor de la memoria. Cuando llamas a .dispose() en un tensor, numTensors disminuirá en la cantidad de tensores que acabas de liberar.

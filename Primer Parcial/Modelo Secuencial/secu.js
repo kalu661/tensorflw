@@ -8,8 +8,8 @@ async function funcionLineal() {
 		loss: "meanSquaredError",
 		optimizer: "sgd",
 	});
-	const xs = tf.tensor2d([1, 3, 5], [3, 1]);
-	const ys = tf.tensor2d([2, 6, 10], [3, 1]);
+	const xs = tf.tensor2d([-1, 0, 1], [3, 1]);
+	const ys = tf.tensor2d([1, 0, 3], [3, 1]);
 	await modelo.fit(xs, ys, { epochs: 800 });
 	document.getElementById("salida").innerHTML = modelo.predict(
 		tf.tensor2d([num], [1, 1])
