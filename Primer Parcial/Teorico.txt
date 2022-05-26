@@ -1,3 +1,8 @@
+Para vizualizar la informacion correctamente 
+en el bloc de nota utilice la opcion
+
+    Formato (Ajuste de linea)
+
 1: La relación que existe entre los términos enseñanza y aprendizaje es que la misma es una relación simbiótica el maestro enseña al alumno, aplica toda su capacidad para que el alumno aprenda; el alumno aprende porque pone en juego sus habilidades cognoscitivas, entre ellas esta el aprendizaje. 
 
 2. El tipo de datos de un tensor debe ser homogéneo (todos del mismo tipo). Estos tipos pueden ser solo Float32, Int32, bool, complex64 o string, sin mezclarlos.
